@@ -10,38 +10,50 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the repository
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      # Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
           cache: 'npm'
 
+      # Install dependencies
       - name: Install Dependencies
         run: npm ci
 
+      # Build Next.js project
       - name: Build Next.js Project
         run: npm run build
 
+      # Run Jest tests with coverage only if build succeeds
       - name: Run Jest Tests with Coverage
+        if: success()
         run: |
           npm install --save-dev jest jest-junit
+          echo "Build succeeded! Running tests..."
           npm test -- --coverage --coverageReporters=lcov --coverageReporters=text-summary
         env:
           CI: true
 
+      # Verify LCOV coverage file only if tests ran
       - name: Verify Coverage File
+        if: success()
         run: |
           if [ ! -f coverage/lcov.info ]; then
-            echo "❌ Coverage file not found!"
+            echo "❌ Coverage file not found or empty!"
             exit 1
           else
-            echo "✅ Coverage file generated successfully."
+            echo "✅ Coverage file generated successfully:"
+            head -n 10 coverage/lcov.info
           fi
 
+      # Generate coverage summary only if tests succeeded
       - name: Generate Coverage Summary
+        if: success()
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
           filename: coverage/lcov.info
@@ -53,6 +65,7 @@ jobs:
           indicators: true
           output: both
 
+      # Upload coverage report artifact (always runs)
       - name: Upload Coverage Report Artifact
         if: always()
         uses: actions/upload-artifact@v4
