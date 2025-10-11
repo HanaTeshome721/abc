@@ -6,7 +6,7 @@ on:
     branches: ['main']
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,22 +22,26 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - id: build
-        name: Build Project
+      - name: Build Next.js Project
         run: npm run build
 
-      - id: test
-        if: steps.build.outcome == 'success'
-        name: Run Unit Tests with Coverage
+      - name: Run Jest Tests with Coverage
         run: |
           npm install --save-dev jest jest-junit
-          npm test -- --coverage --ci --reporters=default --reporters=jest-junit
+          npm test -- --coverage --coverageReporters=lcov --coverageReporters=text-summary
         env:
           CI: true
 
-      - id: coverage
-        if: steps.test.outcome == 'success'
-        name: Generate Coverage Report Summary
+      - name: Verify Coverage File
+        run: |
+          if [ ! -f coverage/lcov.info ]; then
+            echo "❌ Coverage file not found!"
+            exit 1
+          else
+            echo "✅ Coverage file generated successfully."
+          fi
+
+      - name: Generate Coverage Summary
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
           filename: coverage/lcov.info
