@@ -91,7 +91,7 @@ export default function HomePage() {
         {/* Mock AI Assistant Panel */}
         <div className="bg-white rounded-xl shadow p-4">
           <h2 className="text-xl font-semibold text-green-700 mb-2">
-            AI Recommendations for better place
+            AI Recommendations for better place for africa
           </h2>
 
           {!result ? (
