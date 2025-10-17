@@ -97,7 +97,7 @@ export default function HomePage() {
           {!result ? (
             <p className="text-gray-600 italic">
               Click the green button to generate AI insights on East African
-              climate and restoration opportunities.
+              climate and restoration opportunities. i am gone start tommorow 
             </p>
           ) : (
             <div className="space-y-3">
