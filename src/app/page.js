@@ -68,7 +68,7 @@ export default function HomePage() {
         <div>
           <div className="h-80 bg-green-200 rounded-xl shadow flex items-center justify-center">
             <p className="text-green-900 text-center px-4">
-              🗺️ Map Preview Placeholder  
+              🗺️ Map Preview Placeholder   may be some can explain
               <br />
               (East Africa region visualization)
             </p>
