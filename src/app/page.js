@@ -76,7 +76,7 @@ export default function HomePage() {
 
           <div className="mt-4 bg-white rounded-xl p-4 shadow text-gray-700">
             <h2 className="text-xl font-semibold text-green-700 mb-2">
-              African Environmental Context hero to get the wow
+              African Environmental  still not change any things Context hero to get the wow
             </h2>
             <p className="text-sm leading-relaxed">
               Africa’s ecosystems range from humid rainforests to arid savannas.  
