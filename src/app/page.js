@@ -83,7 +83,7 @@ export default function HomePage() {
               Climate stress, deforestation, and land degradation threaten millions of hectares
               of fertile land. This assistant integrates <b>NDVI</b> (vegetation health),
               <b> NDWI</b> (soil moisture), and <b>elevation</b> indicators to pinpoint
-              high-impact restoration zones.
+              high-impact restoration zones. that so cool 
             </p>
           </div>
         </div>
